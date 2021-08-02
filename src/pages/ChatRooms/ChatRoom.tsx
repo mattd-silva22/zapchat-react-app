@@ -1,4 +1,5 @@
 import firebase from "firebase";
+import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { GoogleLoginBtn } from "../../components/GoogleLoginBtn";
 import { HeaderNavbar } from "../../components/HeaderNavbar";
@@ -7,25 +8,31 @@ import { auth } from "../../services/firebase";
 
 import './styles.scss';
 
-export function HomePage() {
+export function ChatRooms() {
     const history = useHistory()
     const { user , singInWithGoogle } = useAuth();
-    if (user) {
-        history.push('/rooms')
-    }
+    useEffect(()=>{
+
+        if(!user) {
+            history.push('/teste/rw')
+        }
+
+
+
+    },[user])
+    
 
     return (
         <>
-         <HeaderNavbar/>
+         <HeaderNavbar showUserData={true} userData={user}/>
 
          <div className="home-page">
              <div className="container">
                  <main>
                     <div className='text-area'>
-                        <p>aplicativo de ChatRoom</p>
-                        <p>entre agora</p>
-                       
-                        <GoogleLoginBtn text={'Entre com sua conta google'} onClick={singInWithGoogle}/>
+                        <p>Selecione uma sala</p>
+                        <p>Use agora</p>
+                        <p>{user ?  (` ola ${user.userName}`) : ( <GoogleLoginBtn text={'faça login com google'} onClick={singInWithGoogle}/>)}</p>
                     </div>
                     
                     

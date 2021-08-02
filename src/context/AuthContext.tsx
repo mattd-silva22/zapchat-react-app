@@ -1,5 +1,6 @@
 
 import { createContext, ReactNode, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { auth ,firebase } from '../services/firebase'
 
 type User = {
@@ -19,6 +20,27 @@ type AuthContextProviderProps = {
 }
 
 
+
+
+export async function handleLogOut() {
+  
+  alert('deseja fazer log out ?')
+  if ( true) {
+    firebase.auth().signOut().then(()=>{
+      alert('fez log out')
+      
+   }).catch((error)=>{
+      alert(`algo deu errado ${error}`)
+    })
+  } else {
+    return
+  }
+
+
+  
+
+}
+
 export const AuthContext = createContext({} as AuthContextType);
 
 
@@ -26,13 +48,7 @@ export function AuthContextProvider(props:AuthContextProviderProps) {
 
   const [ user , setUser] = useState<User>()
 
- async function handleSingOut() {
-  firebase.auth().signOut().then(()=>{
-      alert('saiu do app')
-  }).catch((error)=>{
-      alert(`algo deu errado ${error}`)
-  })
-}
+ 
 
  
 
@@ -107,4 +123,4 @@ useEffect(()=> {
         </AuthContext.Provider>
         
     )
-}
+  }

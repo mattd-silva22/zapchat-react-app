@@ -1,8 +1,21 @@
 
 
 import './styles.scss'
+import {handleLogOut} from '../../context/AuthContext'
 
-export function HeaderNavbar() {
+type User = {
+    userName: string;
+    userId: string;
+    userAvatar: string;
+    userEmail: string;
+}
+
+type HeaderProps = {
+    showUserData?: boolean;
+    userData?: User;
+}
+
+export function HeaderNavbar(props:HeaderProps) {
 
 
     return (
@@ -10,24 +23,26 @@ export function HeaderNavbar() {
         <header className={'header-navbar'}>
             <div className="container">
                 <div>
-                    <h1>logo marca</h1>
+                    <h1>ZapChat</h1>
                 </div>
 
-                <nav className={'nav-top'}>
-                    <ul>
-                        <li>
-                            <a href="#">link 1</a>
-                        </li>
+                {props.showUserData ?  ( 
+                
+                    <div className={'user-area'}> 
+                        <p>{props.userData?.userName}</p>
+                        <img src={props.userData?.userAvatar} alt="" />
+                        <button onClick={handleLogOut}>log out</button>
+                    </div>
+                    
+                    
+                    ) 
+                
+                
+                : ''}
 
-                        <li>
-                            <a href="#">link 1</a>
-                        </li>
+                
 
-                        <li>
-                            <a href="#">link 1</a>
-                        </li>
-                    </ul>
-                </nav>
+                
 
             </div>
         </header>

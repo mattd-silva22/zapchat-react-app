@@ -35,4 +35,19 @@ header.header-navbar {
             }
         }
     }
+
+    .user-area {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+
+        img {
+            height: 42px;
+            width: 42px;
+            border-radius: 50%;
+            border: 3px solid green;
+        }
+    }
 }
